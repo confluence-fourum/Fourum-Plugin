@@ -1,0 +1,13 @@
+textarea {
+    rows: 2;
+    width: 97%;
+}
+
+#padding {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    padding-top: 15px;
+    padding-bottom: 150px;
+}

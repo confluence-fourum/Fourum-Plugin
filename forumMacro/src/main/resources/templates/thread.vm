@@ -1,0 +1,86 @@
+<div>
+    <div>
+        <span><a href="" ng-click="goToMainView()">Main</a>><a href="" ng-click="refresh()">{{thread.title}}</a></span>
+    </div>
+    <br/>
+    <div id="threadTitleThread">
+        <b>{{ thread.title }}</b>
+        <span ng-show="stateInfo.state"> [Closed by {{stateInfo.name}} on {{stateInfo.date | date:'d MMMM y'}}]</span>
+    </div>
+
+    <div id="threadHeader">
+        <div id="threadDescriptionThread">
+            <button  ng-hide="stateInfo.state" ng-click="closeThread()">Close thread</button>
+            <button  ng-show="stateInfo.state" ng-click="openThread()">Open thread</button>
+            <i>{{ thread.description }}</i>
+        </div>
+        <br/>
+
+        <div ng-repeat="item in items | orderBy : ['creationDate']">
+            <div class="itemThread">
+                <div class="threadUserInfo">
+                    <div>
+                        <img class="threadProfilePicture" src="{{item.profileInfo.profilePicture }}"
+                             alt="Your profile picture" border="0"/>
+                    </div>
+                    <div class="threadUserName">{{ item.profileInfo.name }}</div>
+                    <div class="threadUserRole">{{ item.profileInfo.role }}</div>
+                </div>
+                <div class="threadItemMessage">
+                    <div class="threadCreateDateAndMenu">
+                        <div class="threadCreationDate">{{item.creationDate | date:'d MMMM y HH:mm:ss'}}</div>
+                        <div class="bootstrap">
+                            <div class="btn-group" dropdown>
+                                <button type="submit" class="btn btn-primary dropdown-toggle" ng-disabled="stateInfo.state || item.showEditArea">...</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="" ng-click="editPostMessage(item)">Edit</a></li>
+                                    <li><a href="" ng-click="deleteItem(item.id)">Delete</a></li>
+                                    <li><a href="" ng-click="addQuoteToPost(item)">Quote</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bootstrap" ng-if="item.quote != null && !item.showEditArea">
+                        <blockquote>
+                            <div ng-bind-html="item.quote.quoteMessage | emoji"></div>
+                            <footer>
+                                {{ item.quote.user.name }} - {{item.quote.quoteDate | date:'d MMMM y HH:mm:ss'}} <span ng-click="deleteQuote(item)" class="pointer-div" ng-disabled="stateInfo.state">[Remove Quote]</span>
+                            </footer>
+                        </blockquote>
+                    </div>
+                    <div ng-show="!item.showEditArea">
+                        <pre ng-bind-html="item.message | emoji"></pre>
+                    </div>
+                    <div ng-show="item.showEditArea">
+                        <textarea name="editItemMessage" ng-model="item.editedMessage"></textarea>
+                        <input type="submit" value="Save" ng-click="saveEditedPostMessage(item)">
+                        <input type="submit" value="cancel" ng-click="cancelEditingPost(item)">
+                    </div>
+                    <div class="threadLastEdit">
+                        Last Edited on: {{item.lastEditedDate | date:'d MMMM y HH:mm:ss'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <form name="createPostForm" id="createPostForm">
+        <div class="bootstrap" ng-show="threadData.quotedPost != null">
+            <blockquote>
+                <div ng-bind-html="threadData.quotedPost.message | emoji"></div>
+                <footer>
+                    {{ threadData.quotedPost.profileInfo.name }} <span ng-click="removeQuoteFromPost()" class="pointer-div" >[Remove from Post]</span>
+                </footer>
+            </blockquote>
+        </div>
+        <textarea id="createPostTextbox" rows="10"
+                  ng-model="threadData.message" ng-disabled="stateInfo.state" required></textarea>
+        <br/>
+        <button id="createPostButton" ng-disabled="!createPostForm.$valid" ng-click="createPost();">Post</button>
+        <br/>
+        <br/> <br/>
+    </form>
+</div>
+<div>
+    <span><a href="" ng-click="goToMainView()">Main</a>><a href="" ng-click="refresh()">{{thread.title}}</a></span>
+</div>

@@ -1,0 +1,60 @@
+<div id="forumBody">
+	<div class="createThread">
+		<button id="createThread" ng-click="showThreadPopup = true"
+			ng-hide="showThreadPopup">Create thread</button>
+		<button id="goToManagementView" ng-click="goToManagementView()">Management</button>
+	</div>
+	<div id="threadPopup" ng-show="showThreadPopup">
+		<form name="createThreadForm" id="createThreadForm">
+			<label for="title">Titel: </label> <input type="text" id="title"
+				ng-model="threadData.title" required /><br /> <label
+				for="description">Description:</label> <input type="text"
+				id="description" ng-model="threadData.description" required /><br />
+			<label for="sticky">Sticky:</label> <select id="sticky"
+				ng-model="threadData.sticky">
+				<option value="true">Yes</option>
+				<option value="false">No</option>
+			</select> <br />
+			<button id="createThread" ng-disabled="!createThreadForm.$valid"
+				ng-click="createThread(); clearThreadData(); showThreadPopup = false">Create
+			</button>
+			<button id="closeThreadPopup"
+				ng-click="clearThreadData(); showThreadPopup = false">
+				Cancel</button>
+		</form>
+	</div>
+	<div class="elementHeader">
+		<div class="elementHeaderLeftColumn">Thread</div>
+		<div class="elementHeaderRightColumn">Last changed</div>
+	</div>
+	<div class="element">
+		<div
+			ng-repeat="thread in threads | orderBy : ['-sticky', '-lastChangedDate']"
+			class="ng-scope">
+			<div class="thread">
+				<div class="threadLeftColumn">
+					<div id="threadTitle">
+						<div id="threadTitleIcons" class="bootstrap">
+							<span id="lock" ng-show="thread.state"
+								class="glyphicon glyphicon-lock"></span> <span id="threadSticky"
+								ng-show="thread.sticky" class="glyphicon glyphicon-pushpin"></span>
+						</div>
+						<div id="threadTitleText">
+							<pre id="threadTitle" class="wrapword">
+								<a href="" ng-click="goToThreadView(thread.id)">{{ thread.title }}</a>
+							</pre>
+						</div>
+					</div>
+					<pre id="threadDescription" class="wrapword">{{ thread.description }}</pre>
+					<div id="threadCreationInfo">
+						created by {{ thread.profileInfo.name }} on <span>
+							{{thread.date | date:'d MMMM y'}} </span>
+					</div>
+				</div>
+				<div class="threadRightColumn">
+					<div id="threadChangedDate">{{thread.lastChangedDate | date:'d MMMM y HH:mm'}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

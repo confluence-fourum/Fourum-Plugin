@@ -1,0 +1,402 @@
+.wrapword{
+white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+white-space: -pre-wrap;      /* Opera 4-6 */
+white-space: -o-pre-wrap;    /* Opera 7 */
+white-space: pre-wrap;       /* css-3 */
+word-wrap: break-word;       /* Internet Explorer 5.5+ */
+word-break: break-all;
+white-space: normal;
+}
+
+.nav,.pagination,.carousel,.panel-title a {
+	cursor: pointer;
+}
+
+button {
+	color: #ffffff;
+	border: 2px solid black;
+	background-color: #205081;
+}
+
+button:hover {
+	background-color: #3b73af;
+	cursor: pointer;
+}
+
+#createThread {
+	position: absolute;
+	right: 10px;
+}
+
+#closeThreadPopup {
+	position: absolute;
+	right: 70px;
+}
+
+#createThreadForm .ng-valid {
+	border: solid green 2px;
+}
+
+#createThreadForm .ng-invalid {
+	border: solid red 2px;
+}
+
+label {
+	display: inline-block;
+	width: 100px;
+}
+
+#forum {
+	position: relative;
+	border: 2px solid black;
+}
+
+#forumHeader {
+	background-color: #205081;
+	height: 20%;
+}
+
+#forumHeader h1.title {
+	margin-left: 10px;
+	color: #ffffff;
+	font-size: 40px;
+}
+
+#forumHeader h4.description {
+	margin-left: 15px;
+	color: #ffffff;
+}
+
+#forumBody {
+	padding: 10px;
+	position: relative;
+	background-color: #ffffff;
+}
+
+.element {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	max-height: 400px;
+	margin-bottom: 10px;
+}
+
+.elementHeader {
+	display: table;
+	margin-top: 30px;
+	color: #ffffff;
+	position: relative;
+	height: 10%;
+	width: Calc(100% - 9px);
+	padding-left: 5px;
+	border: 2px solid black;
+	background-color: #205081;
+	border: 2px solid black;
+}
+
+.elementHeaderLeftColumn {
+	display: table-cell;
+    width: 83%;
+}
+
+.elementHeaderRightColumn {
+	display: table-cell;
+    width: 17%;
+}
+
+.thread {
+	display: table;
+	position: relative;
+	padding-left: 5px;
+	border: 2px solid black;
+	border-top: none;
+	width: Calc(100% - 9px);
+}
+
+.threadLeftColumn {
+	display: table-cell;
+	width: 85%;
+}
+
+.threadRightColumn {
+    display: table-cell;
+    width: 15%;
+}
+
+#lock {
+	position: relative;
+	background-image:
+		url("https://developer.mozilla.org/samples/cssref/images/startransparent.gif");
+}
+
+#threadTitle {
+    display: table;
+}
+
+#threadTitleIcons {
+    display: table-cell;
+}
+
+#threadTitleText {
+    display: table-cell;
+    color: #205081;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#threadTitleThread {
+	color: #205081;
+	font-size: 15px;
+	margin-left: 10px;
+	padding-top: 0px;
+	margin-top: -10px;
+	position: absolute;
+	background: #ffffff;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#threadDescription {
+	
+}
+
+#threadCreationInfo {
+	font-style: italic;
+	font-size: 10px;
+}
+
+#threadChangedDate {
+	font-style: italic;
+	font-size: 10px;
+}
+
+#info {
+	position: relative;
+	border: dashed 1px;
+}
+
+#forumFooter {
+	border-top-style: solid;
+	border-top-color: black;
+	border-top-width: 1px;
+	text-align: center;
+	height: 25px;
+	width: 100%;
+	background-color: RGB(245, 245, 245);
+}
+
+#threadHeader {
+	padding: 5px;
+	padding-top: 1%;
+	margin-left: 5px;
+	margin-right: 5px;
+	border: 2px solid #205081;
+}
+
+#threadDescriptionThread {
+	width: 100%;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #205081;
+}
+
+.itemThread {
+	display: table;
+	table-layout: fixed;
+	border: 1px solid #205081;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.threadUserInfo {
+	display: table-cell;
+	background: RGB(245, 245, 245);
+	border-right: 1px solid #205081;
+	width: 150px;
+	padding: 5px;
+	padding-bottom: 0px;
+	bottom: 0px;
+}
+
+.threadItemMessage {
+	display: table-cell;
+	width: Calc(100% -           150px);
+	padding: 5px;
+	vertical-align: top;
+	word-wrap: break-word;
+}
+
+pre {
+	font-family: sans-serif;
+}
+
+#createPostTextbox {
+	margin-left: 5px;
+	resize: none;
+	height: 50px;
+	margin-bottom: 10px;
+	width: Calc(100% -           10px);
+}
+
+#createPostButton {
+	position: absolute;
+	right: 5px;
+}
+
+#createPostForm {
+	margin-left: 5px;
+	margin-right: 10px;
+}
+
+
+.attachmentitem
+{
+    border-top: 1px solid black;
+    background-color: RGB(245,245,245);
+    width: 100%
+}
+
+.bootstrap .btn-primary {
+    color: #fff;
+    background-color: #205081;
+    border-color: #000000;
+    border-width: 2px;
+}
+
+.bootstrap .btn-primary:hover, .bootstrap .btn-primary:focus, .bootstrap .btn-primary:active, .bootstrap .btn-primary.active, .open .dropdown-toggle.bootstrap .btn-primary {
+    color: #fff;
+    background-color: #3b73af;
+    border-color: #000000;
+}
+
+.bootstrap .btn-primary:active, .bootstrap .btn-primary.active, .open .dropdown-toggle.bootstrap .btn-primary {
+    background-image: none
+background-color: #205081;
+}
+
+.bootstrap .btn-primary.disabled, .bootstrap .btn-primary[disabled], fieldset[disabled] .bootstrap .btn-primary, .bootstrap .btn-primary.disabled:hover, .bootstrap .btn-primary[disabled]:hover, fieldset[disabled] .bootstrap .btn-primary:hover, .bootstrap .btn-primary.disabled:focus, .bootstrap .btn-primary[disabled]:focus, fieldset[disabled] .bootstrap .btn-primary:focus, .bootstrap .btn-primary.disabled:active, .bootstrap .btn-primary[disabled]:active, fieldset[disabled] .bootstrap .btn-primary:active, .bootstrap .btn-primary.disabled.active, .bootstrap .btn-primary[disabled].active, fieldset[disabled] .bootstrap .btn-primary.active {
+    background-color: #205081;
+    border-color: #000000;
+}
+
+.bootstrap .btn-primary .badge {
+    color: #ffffff;
+    background-color: #205081;
+}
+
+.bootstrap .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 2px solid #000000;
+    /*line-height: 1.42857143;*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 0px;
+    height:22px;
+    padding-top:0px;
+}
+
+
+.bootstrap .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #000000;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    background-clip: padding-box;
+    border-radius: 0px;
+}
+
+.threadCreateDateAndMenu {
+    width: Calc(100% + 6px);
+    background-color: RGB(245, 245, 245);
+    border-bottom: 1px solid #205081;
+    margin-left: -5px;
+    padding-bottom: 5px;
+    padding: 2px;
+    margin-top: -5px;
+    display: table;
+    table-layout: fixed;
+}
+
+.bootstrap .btn-group, .bootstrap .btn-group-vertical {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: Calc(100% - 45px);
+}
+
+.pointer-div {
+    cursor: pointer;
+}
+
+.bootstrap .open > .dropdown-menu {
+    display: block;
+    left: -120px;
+}
+
+.threadCreationDate
+{
+    display: table-cell;
+}
+
+.threadLastEdit
+{
+    font-size: 10px;
+    font-style:oblique;
+    border-top: 1px solid black;
+    width: Calc(100% + 6px);
+    margin-top: 5px;
+}
+
+.threadProfilePicture
+{
+
+}
+
+.threadUserName
+{
+    text-decoration:underline;
+}
+
+.threadUserRole
+{
+    font-size: 12px;
+}
+<<<<<<< HEAD
+
+.threadMessage
+{
+}
+
+.threadQuote
+{
+    font-size: 14px;
+}
+
+.bootstrap * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+=======
+>>>>>>> eb84668e54d72e8b22361fb51de050aa5fb95eff

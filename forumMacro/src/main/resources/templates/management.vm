@@ -1,0 +1,129 @@
+<div>
+    <span><a href="" ng-click="goToMainView()">Main</a>><a href="" ng-click="refresh()">Management</a></span>
+
+    <h2>Management</h2>
+
+    <div class="bootstrap">
+        <tabset justified="true">
+            <tab heading="Users" class="padding">
+                <div class="padding">
+                    <strong>Add User: </strong><input type="text" name="user" ng-model="userSearch">
+                    <table class="table table-bordered table-hover">
+                        <tr ng-repeat="user in confluenceUsers | filter:userSearch : user.fullName"
+                            ng-show="userSearch">
+                            <td> {{user.fullName}}</td>
+                            <td>
+                                <select data-ng-options="role.name for role in roles" data-ng-model="selectedOption"
+                                        ng-show="userNotExists(user)"></select>
+                                <span ng-hide="userNotExists(user)">User Already Exists</span>
+                            </td>
+                            <td>
+                                <input type="submit" value="Add User" ng-show="userNotExists(user)"
+                                       ng-disabled="!selectedOption" ng-click="addUser(user, selectedOption)">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2>Managing existing users</h2>
+                    <strong>Search existing users: </strong> <input type="text" name="existingUser"
+                                                                    ng-model="existingUserSearch">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>New Role</th>
+                        </tr>
+                        <tr ng-repeat="user in users | filter:existingUserSearch : user.name">
+                            <td><input type="checkbox" checklist-model="usersToDelete" checklist-value="user"></td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.role.name}}</td>
+                            <td><select ng-model="selectedRoleOption" ng-options="role.name for role in roles"
+                                        ng-change="update(user, selectedRoleOption)"></select></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Delete Selected" ng-disabled="usersToDelete.length == 0"
+                           ng-click="deleteUsers()">
+                    <input type="submit" value="Save Users" ng-click="saveUsers()"
+                           ng-disabled="usersToChange.length == 0">
+                </div>
+            </tab>
+            <tab heading="Roles" class="padding">
+                <div class="padding">
+                    <table class="table table-bordered table-hover">
+                        <tbody ng-repeat="role in roles">
+                        <tr>
+                            <td>
+                                <strong>Role name</strong>
+                                {{role.name}}
+                            </td>
+                            <td>
+                                <strong>New role name</strong>
+                                <input type="text" name="changedRoleName" ng-model="role.newName">
+                            </td>
+                            <td>
+                                <input type="submit" ng-disabled="!role.newName" value="Save new role name"
+                                       ng-click="setRoleName(role,role.newName);">
+                            </td>
+                            <td>
+                                <input type="submit" value="Save new role description"
+                                       ng-click="setRoleDescription(role)">
+                            </td>
+                            <td>
+                                <input type="submit" value="Delete role" ng-click="deleteRole(role.name)">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <textarea name="roleDescription" ng-model="role.description"></textarea>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" name="newRoleName" ng-model="newRoleName">
+                            </td>
+                            <td colspan="2">
+                                <input type="submit" ng-disabled="!newRoleName || !newRoleDescription"
+                                       value="Save new role"
+                                       ng-click="createRole(newRoleName, newRoleDescription); newRoleName = null; newRoleDescription = null">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <textarea name="newRoleDescription" ng-model="newRoleDescription"></textarea>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </tab>
+            <tab heading="Permissions" class="padding">
+                <div class="padding">
+                    <input type="submit" value="Save changes" ng-click="saveRolePermissions()">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>permissions\roles</th>
+                            <th ng-repeat="role in roles">
+                                {{role.name}}
+                            </th>
+                        </tr>
+                        <tr ng-repeat="permission in permissions">
+                            <td>
+                                {{permission.name}}
+                            </td>
+                            <td ng-repeat="role in roles">
+                                <input type="checkbox" checklist-model="role.permissions"
+                                       checklist-value="permission">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+    <br/>
+    <span><a href="" ng-click="goToMainView()">Main</a>><a href="" ng-click="refresh()">Management</a></span>
+</div>

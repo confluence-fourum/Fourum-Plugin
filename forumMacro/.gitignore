@@ -1,0 +1,11 @@
+/target
+/.settings
+.idea/
+*.iml
+/.classpath
+/bin
+/.project
+*.log
+../test*
+../forumMacro.zip
+*.db

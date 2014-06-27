@@ -1,0 +1,19 @@
+#requireResource("forumMacro.forumMacro:forummacro-resources")
+<section id="forum" ng-app="forumMacro" ng-controller="mainController as main"
+         class="ng-scope">
+    <script>angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));</script>
+    <script>
+        forumMacro.run(function ($rootScope) {
+            $rootScope.forumID = $forumID;
+        });
+    </script>
+    <div id="forumHeader">
+        <h1 class="title" class="pointer-div" ng-click="goToMainView()">$title</h1>
+        <h4 class="description">$description</h4>
+        <button value="Refresh page" ng-click="refresh()">Refresh</button>
+    </div>
+    <div ng-view></div>
+    <div id="forumFooter">
+       Get the latest update <a href="http://www.fourum.net/">here</a>.
+    </div>
+</section>

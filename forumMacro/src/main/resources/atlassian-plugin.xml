@@ -1,0 +1,119 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="forummacro"/>
+
+    <!-- add our web resources -->
+    <web-resource key="forummacro-resources" name="forummacro Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+
+        <resource type="download" name="bootstrap.min.css" location="/css/bootstrap.min.css"/>
+        <resource type="download" name="forum.css" location="/css/forum.css"/>
+        <resource type="download" name="thread.css" location="/css/thread.css"/>
+        <resource type="download" name="management.css" location="/css/management.css"/>
+        <resource type="download" name="emoji.min.css" location="/css/emoji.min.css"/>
+        <resource type="download" name="forumMacro.js" location="/js/forumMacro.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <resource type="download" name="emoji.png" location="/images/emoji.png"/>
+        <resource type="download" name="glyphicons-halflings-regular.eot" location="fonts/glyphicons-halflings-regular.eot"/>
+        <resource type="download" name="glyphicons-halflings-regular.svg" location="fonts/glyphicons-halflings-regular.svg"/>
+        <resource type="download" name="glyphicons-halflings-regular.ttf" location="fonts/glyphicons-halflings-regular.ttf"/>
+        <resource type="download" name="glyphicons-halflings-regular.woff" location="fonts/glyphicons-halflings-regular.woff"/>
+        <resource type="download" name="angular.js" location="/js/libs/angular.min.js"/>
+        <resource type="download" name="angular-route.js" location="/js/libs/angular-route.js"/>
+        <resource type="download" name="angular-animate.js" location="/js/libs/angular-animate.js"/>
+        <resource type="download" name="angular-resource.js" location="/js/libs/angular-resource.js"/>
+        <resource type="download" name="angular-sanitize.js" location="/js/libs/angular-sanitize.js"/>
+        <resource type="download" name="checklist-model.js" location="/js/libs/checklist-model.js"/>
+        <resource type="download" name="emoji.min.js" location="/js/libs/emoji.min.js"/>
+        <resource type="download" name="ui-bootstrap-tpls-0.11.0.min.js"
+                  location="/js/libs/ui-bootstrap-tpls-0.11.0.min.js"/>
+        <resource type="download" name="app.js" location="/js/app.js"/>
+        <resource type="download" name="forumRestAPI.js" location="/js/forumRestAPI.js"/>
+        <resource type="download" name="mainController.js" location="/js/mainController.js"/>
+        <resource type="download" name="managementController.js" location="/js/managementController.js"/>
+        <resource type="download" name="threadController.js" location="/js/threadController.js"/>
+        <resource type="velocity" name="body.vm" location="resources/body.vm"/>
+        <resource type="velocity" name="thread.vm" location="resources/thread.vm"/>
+        <resource type="velocity" name="forum.vm" location="resources/forum.vm"/>
+        <context>forummacro</context>
+    </web-resource>
+
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+
+    <xhtml-macro name="Forum Macro" class="forummacro.forum.Forum" key="Forum Macro">
+        <parameters>
+            <parameter name="forum_title" type="string" required="true" default="Forum title">
+                <option key="showNameInPlaceholder" value="true"/>
+                <option key="showValueInPlaceholder" value="true"/>
+            </parameter>
+            <parameter name="forum_description" type="string" required="true" default="Forum description"/>
+        </parameters>
+    </xhtml-macro>
+
+    <xwork name="forumVM" key="forumVM">
+        <package name="forum" extends="default" namespace="/plugins/forum">
+            <default-interceptor-ref name="validatingStack"/>
+            <action name="forumVM" class="forummacro.forum.ForumVM">
+                <result name="success" type="velocity">/templates/forum.vm</result>
+            </action>
+            <action name="threadVM" class="forummacro.forum.ForumVM">
+                <result name="success" type="velocity">/templates/thread.vm</result>
+            </action>
+            <action name="managementVM" class="forummacro.forum.ForumVM">
+                <result name="success" type="velocity">/templates/management.vm</result>
+            </action>
+        </package>
+    </xwork>
+
+    <rest key="ThreadRestService" path="/forum" version="1.0">
+        <description>Provides a REST interface to the ForumThread Service.</description>
+    </rest>
+
+    <ao key="ao-module">
+        <description>The module configuring the Active Objects service used by this plugin</description>
+        <entity>forummacro.forum.ao.ForumAO</entity>
+        <entity>forummacro.forum.ao.ThreadAO</entity>
+        <entity>forummacro.forum.ao.PostAO</entity>
+		<entity>forummacro.forum.ao.StateAO</entity>
+        <entity>forummacro.forum.ao.AttachmentAO</entity>
+        <entity>forummacro.forum.ao.QuoteAO</entity>
+        <entity>forummacro.rightsmanagement.ao.PermissionAO</entity>
+        <entity>forummacro.rightsmanagement.ao.RoleToPermissionAO</entity>
+        <entity>forummacro.rightsmanagement.ao.RoleAO</entity>
+        <entity>forummacro.rightsmanagement.ao.UserAO</entity>
+        <entity>forummacro.rightsmanagement.ao.UserAO</entity>
+    </ao>
+
+    <component key="tx-processor" name="Transactional Annotation Processor"
+               class="com.atlassian.activeobjects.external.TransactionalAnnotationProcessor">
+        <decription>Processes @Transactional annotations.</decription>
+    </component>
+
+    <component-import key="ao" name="Active Objects service"
+                      interface="com.atlassian.activeobjects.external.ActiveObjects">
+        <description>Component to access Active Objects functionality from the plugin</description>
+    </component-import>
+
+
+    <component key="forum" name="forum" class="forummacro.forum.Forum"/>
+    <component key="item-repository" name="Item Repository" class="forummacro.forum.ao.ItemRepositoryImplement"/>
+    <component key="thread-repository" name="Thread Repository" class="forummacro.forum.ao.ThreadRepositoryImplement"/>
+    <component key="forumRepository" name="Forum Repository" class="forummacro.forum.ao.ForumRepositoryImplement"/>
+    <component key="userManagementReposiotry" name="Usermanagement Repository"
+               class="forummacro.rightsmanagement.ao.UserManagementRepositoryImplement"/>
+    <component key="roleManagementReposiotry" name="Rolemanagement Repository"
+               class="forummacro.rightsmanagement.ao.RoleManagementRepositoryImplement"/>
+    <component key="permissionManagementReposiotry" name="Permissionmanagement Repository"
+               class="forummacro.rightsmanagement.ao.PermissionManagementRepositoryImplement"/>
+    <component key="rightsmanagement-service" name="RightsManagement Service"
+               class="forummacro.rightsmanagement.RightsManagementImplement"/>
+    <component key="sanitizer" name="sanitizer" class="restapi.Sanitizer"/>
+</atlassian-plugin>
